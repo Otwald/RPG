@@ -19,3 +19,19 @@ def Weighted_NumberGen(data_list, weight):
         low = low + weight[count]
         count = count + 1
         high = high + weight[count]
+
+def Multi_NumberGen(data_list, count):
+    i = 0
+    out= []
+    while i < count:
+        data = Monster_NumberGen(data_list)
+        j = 0
+        for item in data_list:
+            if item == data:
+                index = j
+                break
+            j = j + 1
+        out.append(data)
+        data_list.pop(index)
+        i = i + 1
+    return out
