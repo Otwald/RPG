@@ -5,7 +5,7 @@ class Body_Gen:
 
     def Body_Skin(self, index):
         skin_c_list = ['pale','peach', 'olive', 'brown', 'black', 
-            'light green', 'dark green', 'black', 'blue', 'red']
+            'light_green', 'dark_green', 'blue', 'red']
         return skin_c_list[index]
 
     def Body_Type(self, index):
@@ -21,9 +21,9 @@ class Body_Gen:
         return headform_list[index]
 
     def Body_EyeColor(self, index):
-        eye_list = ['green', 'blue', 'brown', 'red', 'purple']
+        eye_list = ['green_e', 'blue_e', 'brown_h', 'red_h', 'purple_e']
         return eye_list[index]
-
+    
     def Body_HairLength(self, index):
         hair_l_list = ['short', 'chin-length', 'shoulder-length', 'long', 'none']
         return hair_l_list[index]
@@ -33,32 +33,32 @@ class Body_Gen:
         return hair_t_list[index]
 
     def Body_HairColor(self, index):
-        hair_c_list = ['brown', 'black', 'blond', 'red']
+        hair_c_list = ['brown_h', 'black_h', 'blond_h', 'red_h']
         return hair_c_list[index]
 
     def Body_Nose(self, index):
-        nose_list = ['crooked', 'small', 'tall', 'pointed']
+        nose_list = ['crooked', 'small_n', 'tall_n', 'pointed_n']
         return nose_list[index]
 
     def Body_Chin(self, index):
-        chin_list = ['energetic', 'pointed', 'round', 'small', 'protruding']
+        chin_list = ['energetic_c', 'pointed_c', 'round_c', 'small_c', 'protruding_c']
         return chin_list[index]
     
     def Body_EarForm(self, index):
-        ear_f_list = ['sticking out', 'fitting', 'pointy' , 'pointy ragged']
+        ear_f_list = ['sticking_out_e', 'fitting_e', 'pointy_e' , 'pointy_ragged_e']
         return ear_f_list[index]
 
     def Body_EarSize(self, index):
-        ear_s_list = ['big', 'small']
+        ear_s_list = ['big_e', 'small_e']
         return ear_s_list[index]
 
     def Body_LipForm(self, index):
-        lip_f_list = ['thin', 'balanced' , 'plump', 'thin upperlip', 'thin lowerlip']
+        lip_f_list = ['thin_l', 'balanced_l' , 'plump_l', 'thin_upperlip_l', 'thin_lowerlip_l']
         return lip_f_list[index]
 
     def Body_HornSize(self, index):
         #4
-        horn_s_list = ['tiny', 'small', 'medium', 'large', 'giant']
+        horn_s_list = ['tiny_h', 'small_h', 'medium_h', 'large_h', 'giant_h']
         return horn_s_list[index]
 
     def Body_HornForm(self, index):
@@ -71,8 +71,8 @@ class Body_Gen:
         return horn_n_list[index]
 
     def Body_TuskSize(self, index):
-        tusk_s_list = ['none' ,'tiny', 'small', 'medium', 'large', 'giant']
-        return tusk_s_list
+        tusk_s_list = ['none_t' ,'tiny_t', 'small_t', 'medium_t', 'large_t', 'giant_T']
+        return tusk_s_list[index]
 
     def Body_ArmLength(self, index):
         arm_l_list = ['long', 'medium', 'small']
@@ -113,7 +113,6 @@ class Body_Gen:
     def Body_General(self, switch_list):
         output = {}
         ele_list = self.Body_Head()
- 
         for key, value in switch_list.items():
             if value != None:
                 index = Monster_NumberGen(value)

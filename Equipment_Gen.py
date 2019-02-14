@@ -2,6 +2,7 @@ from Random_Gen import Monster_NumberGen
 from Random_Gen import Weighted_NumberGen
 from Random_Gen import Multi_NumberGen
 
+
 class Equipment_Gen:
 
 

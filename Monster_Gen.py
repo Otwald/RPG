@@ -13,12 +13,22 @@ class Monster_Gen:
         mon_list = [self.Monster_Orcoid, self.Monster_Undead, 
                 self.Monster_Human, self.Monster_Repte, 
                 self.Monster_Demon]
-        # mon_list = [self.Monster_Demon]
+        # mon_list = [self.Monster_Orcoid]
         return Monster_NumberGen(mon_list)
 
     def Monster_SwitchHandler(self):
         statement = self.Monster_ArtGen()
-        race,  body_dict = statement()
+        race, input_list = statement()
+
+        output_list = []
+        for item in input_list:   
+            item = BG.Body_General(item)
+            output_list.append(item)
+        head_dict = self.Monster_Head(output_list[1])
+        limbs_dict = self.Monster_limbs(output_list[2])
+
+        body_dict = {'skin_color' : output_list[0]['skin_color'], 'body_type': output_list[0]['body_type'], 'body_size' : output_list[0]['body_size'], 
+            'head' : head_dict, 'limbs' : limbs_dict, 'wing_size' :output_list[0]['wing_size'], 'tail_length' : output_list[0]['tail_length'] }
         return race, body_dict
         count = 0
         # for item in over_list:
@@ -74,38 +84,8 @@ class Monster_Gen:
         race = 'Orc'
 
         input_list = [body_dict, head_dict, limbs_dict]
-        output_list = []
-        for item in input_list:   
-            item = BG.Body_General(item)
-            output_list.append(item)
 
-        head_dict = self.Monster_Head(output_list[1])
-        limbs_dict = self.Monster_limbs(output_list[2])
-
-        body_dict = {'skin_color' : output_list[0]['skin_color'], 'body_type': output_list[0]['body_type'], 
-            'head' : head_dict, 'limbs' : limbs_dict, 'wing_size' :output_list[0]['wing_size'], 'tail_length' : output_list[0]['tail_length'] }
-
-
-        # body_list = {'skin_color': skin_c_list, 'body_type': body_t_list, 'body_size': body_s_list}
-        # head_dict = {'head_form': headform_list, 'eye_color' :eye_list, 'nose': nose_list, 'chin' : chin_list, 'lip_form' : lip_f_list}
-        # ear_dict = {'ear_form' : ear_f_list, 'ear_size':ear_s_list}
-        # hair_dict = {'hair_lengt' : hair_l_list, 'hair_type': hair_t_list, 'hair_color' : hair_c_list}
-        # tusk_list = {'tusk_size': tusk_s_list}
-        # limbs_dict = {'arm_length': arm_l_list, 'hand_size' : hand_s_list, 'hand_claw_size': handclaw_s_list, 
-        #     'leg_length' :leg_l_list, 'foot_size': foot_s_list, 'foot_claw_size': footclaw_s_list, 'foot_type': foot_t_list}
-        # race = 'Orc'
-
-        # tusk_dict = BG.Body_General(tusk_list)
-        # head_dict = BG.Body_General(head_dict)
-        # ear_dict = BG.Body_General(ear_dict)
-        # tusk_dict = {'tusk_size' : None}
-        # hair_dict = {'hair_lengt' : None}
-        # horn_dict = {'pair_number' : None}
-        # head_dict = self.Monster_Head(head_dict, hair_dict,  ear_dict, horn_dict, tusk_dict)
-        # body_dict = BG.Body_General(body_list)
-
-        # body_dict = {'skin_color' : body_dict['skin_color'], 'body_type': body_dict['body_type'], 'head' : head_dict}
-        return race , body_dict
+        return race, input_list
 
     def Monster_Undead(self):
         skin_c_list = [1,2,3,5]
@@ -134,35 +114,8 @@ class Monster_Gen:
         race = 'Human'
 
         input_list = [body_dict, head_dict, limbs_dict]
-        output_list = []
-        for item in input_list:   
-            item = BG.Body_General(item)
-            output_list.append(item)
 
-        head_dict = self.Monster_Head(output_list[1])
-        limbs_dict = self.Monster_limbs(output_list[2])
-
-        body_dict = {'skin_color' : output_list[0]['skin_color'], 'body_type': output_list[0]['body_type'], 
-            'head' : head_dict, 'limbs' : limbs_dict, 'wing_size' :output_list[0]['wing_size'], 'tail_length' : output_list[0]['tail_length'] }
-
-        # body_list = {'skin_color': skin_c_list, 'body_type': body_t_list, 'body_size': body_s_list}
-        # head_dict = {'head_form': headform_list, 'eye_color' :eye_list, 'nose': nose_list, 'chin' : chin_list, 'lip_form' : lip_f_list}
-        # ear_dict = {'ear_form' : ear_f_list, 'ear_size':ear_s_list}
-        # hair_dict = {'hair_lengt' : hair_l_list, 'hair_type': hair_t_list, 'hair_color' : hair_c_list}
-        # limbs_dict = {'arm_length': arm_l_list, 'hand_size' : hand_s_list, 'hand_claw_size': handclaw_s_list, 
-        #     'leg_length' :leg_l_list, 'foot_size': foot_s_list, 'foot_claw_size': footclaw_s_list, 'foot_type': foot_t_list}
-        # race = 'Undead'
-
-        # hair_dict = BG.Body_General(hair_dict)
-        # head_dict = BG.Body_General(head_dict)
-        # ear_dict = BG.Body_General(ear_dict)
-        # tusk_dict = {'tusk_size' : None}
-        # horn_dict = {'pair_number' : None}
-        # head_dict = self.Monster_Head(head_dict, hair_dict,  ear_dict, horn_dict, tusk_dict)
-        # body_dict = BG.Body_General(body_list)
-
-        # body_dict = {'skin_color' : body_dict['skin_color'], 'body_type': body_dict['body_type'], 'head' : head_dict}
-        return race, body_dict
+        return race, input_list
 
     def Monster_Human(self):
         skin_c_list = [0,1,2,3,4]
@@ -191,36 +144,8 @@ class Monster_Gen:
         race = 'Human'
 
         input_list = [body_dict, head_dict, limbs_dict]
-        output_list = []
-        for item in input_list:   
-            item = BG.Body_General(item)
-            output_list.append(item)
+        return race, input_list       
 
-        head_dict = self.Monster_Head(output_list[1])
-        limbs_dict = self.Monster_limbs(output_list[2])
-
-        body_dict = {'skin_color' : output_list[0]['skin_color'], 'body_type': output_list[0]['body_type'], 
-            'head' : head_dict, 'limbs' : limbs_dict, 'wing_size' :output_list[0]['wing_size'], 'tail_length' : output_list[0]['tail_length'] }
-
-
-        # body_list = {'skin_color': skin_c_list, 'body_type': body_t_list, 'body_size': body_s_list}
-        # head_dict = {'head_form': headform_list, 'eye_color' :eye_list, 'nose': nose_list, 'chin' : chin_list, 'lip_form' : lip_f_list}
-        # ear_dict = {'ear_form' : ear_f_list, 'ear_size':ear_s_list}
-        # hair_dict = {'hair_lengt' : hair_l_list, 'hair_type': hair_t_list, 'hair_color' : hair_c_list}
-        # limbs_dict = {'arm_length': arm_l_list, 'hand_size' : hand_s_list, 'hand_claw_size': handclaw_s_list, 
-        #     'leg_length' :leg_l_list, 'foot_size': foot_s_list, 'foot_claw_size': footclaw_s_list, 'foot_type': foot_t_list}
-        # race = 'Human'
-        # hair_dict = BG.Body_General(hair_dict)
-        # head_dict = BG.Body_General(head_dict)
-        # ear_dict = BG.Body_General(ear_dict)
-        # tusk_dict = {'tusk_size' : None}
-        # horn_dict = {'pair_number' : None}
-        # head_dict = self.Monster_Head(head_dict, hair_dict,  ear_dict, horn_dict, tusk_dict)
-        # body_dict = BG.Body_General(body_list)
-
-        # body_dict = {'skin_color' : body_dict['skin_color'], 'body_type': body_dict['body_type'], 'head' : head_dict}
-        return race, body_dict
-        
     def Monster_Repte(self):
         skin_c_list = [3,4,5,6,7,8]
         body_t_list = [0,1,2,3,4,5,6] 
@@ -248,34 +173,8 @@ class Monster_Gen:
         race = 'Lizardmen'
 
         input_list = [body_dict, head_dict, limbs_dict]
-        output_list = []
-        for item in input_list:   
-            item = BG.Body_General(item)
-            output_list.append(item)
 
-        head_dict = self.Monster_Head(output_list[1])
-        limbs_dict = self.Monster_limbs(output_list[2])
-
-        body_dict = {'skin_color' : output_list[0]['skin_color'], 'body_type': output_list[0]['body_type'], 
-            'head' : head_dict, 'limbs' : limbs_dict, 'wing_size' :output_list[0]['wing_size'], 'tail_length' : output_list[0]['tail_length'] }
-        # body_list = {'skin_color': skin_c_list, 'body_type': body_t_list, 'body_size': body_s_list}
-        # head_dict = {'head_form': headform_list, 'eye_color' :eye_list, 'nose': nose_list, 'chin' : chin_list}
-        # ear_dict = {'ear_form' : ear_f_list, 'ear_size':ear_s_list}
-        # horn_dict = { 'pair_number' : horn_n_list, 'horn_size':  horn_s_list , 'horn_form': horn_f_list}
-        # limbs_dict = {'arm_length': arm_l_list, 'hand_size' : hand_s_list, 'hand_claw_size': handclaw_s_list, 
-        #     'leg_length' :leg_l_list, 'foot_size': foot_s_list, 'foot_claw_size': footclaw_s_list, 'foot_type': foot_t_list}
-        # race = 'Lizardmen'
-        # head_dict = BG.Body_General(head_dict)
-        # ear_dict = BG.Body_General(ear_dict)
-        # horn_dict = BG.Body_General(horn_dict)
-        # tusk_dict = {'tusk_size' : None}
-        # hair_dict = {'hair_lengt' : None}
-        # head_dict.update({'lip_form' : None})
-        # head_dict = self.Monster_Head(head_dict, hair_dict,  ear_dict, horn_dict, tusk_dict)
-        # body_dict = BG.Body_General(body_list)
-
-        # body_dict = {'skin_color' : body_dict['skin_color'], 'body_type': body_dict['body_type'], 'head' : head_dict}
-        return race , body_dict
+        return race, input_list
         
     def Monster_Demon(self):
         skin_c_list = [1,2,9,4]
@@ -309,30 +208,15 @@ class Monster_Gen:
         race = 'Demonkin'
 
         input_list = [body_dict, head_dict, limbs_dict]
-        output_list = []
-        for item in input_list:   
-            item = BG.Body_General(item)
-            output_list.append(item)
 
-        head_dict = self.Monster_Head(output_list[1])
-        limbs_dict = self.Monster_limbs(output_list[2])
-
-        body_dict = {'skin_color' : output_list[0]['skin_color'], 'body_type': output_list[0]['body_type'], 
-            'head' : head_dict, 'limbs' : limbs_dict, 'wing_size' :output_list[0]['wing_size'], 'tail_length' : output_list[0]['tail_length'] }
-        # hair_dict = BG.Body_General(hair_dict)
-        # head_dict = BG.Body_General(head_dict)
-        # ear_dict = BG.Body_General(ear_dict)
-        # horn_dict = BG.Body_General(horn_dict)
-        # limbs_dict = BG.Body_General(limbs_dict)
-        # head_dict = self.Monster_Head(output_list[1:], hair_dict,  ear_dict, horn_dict, tusk_dict)
-        # body_dict = BG.Body_General(body_list)
-        return race, body_dict
+        return race, input_list
 
     def Monster_Head(self, head):
 
-        if head['hair_lengt'] != None:
-            hair = {'lengt': head['hair_lengt'], 'type': head['hair_type'], 'color': head['hair_color']}
+        if head['hair_lengt'] != None  and head['hair_lengt'] != 'none':
+            hair = {'length': head['hair_lengt'], 'type': head['hair_type'], 'color': head['hair_color']}
         else: 
+            print('ping')
             hair = None
             
         if head['ear_form'] != None:
@@ -348,9 +232,9 @@ class Monster_Gen:
         if head['tusk_size'] == None:
             tusk = None
         else:
-            tusk = {'tusk_size' : head['tusk_size']}
+            tusk = {'size' : head['tusk_size']}
             
-        head_dict = {'head_form' : head['head_form'], 'eye_color' : head['eye_color'] , 
+        head_dict = {'form' : head['head_form'], 'eye_color' : head['eye_color'] , 
             'hair': hair, 
             'horn' : horn,
             'nose': head['nose'], 'chin': head['chin'],  
