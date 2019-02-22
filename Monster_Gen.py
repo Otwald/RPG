@@ -57,7 +57,7 @@ class Monster_Gen:
 
 
     def Monster_Orcoid(self):
-        skin_c_list = [4, 5,6,7]
+        skin_c_list = [4,5,6,7]
         body_t_list = [0,1,2,3,4,6] 
         body_s_list = [0,1,2]
         headform_list = [2,3] 
@@ -216,13 +216,12 @@ class Monster_Gen:
         if head['hair_lengt'] != None  and head['hair_lengt'] != 'none':
             hair = {'length': head['hair_lengt'], 'type': head['hair_type'], 'color': head['hair_color']}
         else: 
-            print('ping')
             hair = None
             
         if head['ear_form'] != None:
             ear =  {'form' : head['ear_form'], 'size': head['ear_size']}
         else: 
-            ear = {'form' : 'hole'}
+            ear = None
         
         if head['pair_number'] == None:
             horn = None

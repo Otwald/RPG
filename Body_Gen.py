@@ -5,7 +5,7 @@ class Body_Gen:
 
     def Body_Skin(self, index):
         skin_c_list = ['pale','peach', 'olive', 'brown', 'black', 
-            'light_green', 'dark_green', 'blue', 'red']
+            'light_green', 'dark_green', 'blue', 'red', 'purple']
         return skin_c_list[index]
 
     def Body_Type(self, index):
@@ -17,7 +17,7 @@ class Body_Gen:
         return body_s_list[index]
 
     def Body_HeadForm(self, index):
-        headform_list = ['oval', 'long', 'round', 'angular']
+        headform_list = ['oval', 'long_h', 'round', 'angular']
         return headform_list[index]
 
     def Body_EyeColor(self, index):
@@ -75,39 +75,39 @@ class Body_Gen:
         return tusk_s_list[index]
 
     def Body_ArmLength(self, index):
-        arm_l_list = ['long', 'medium', 'small']
+        arm_l_list = ['long_l', 'medium_l', 'small_l']
         return arm_l_list[index]
 
     def Body_HandSize(self, index):
-        hand_s_list = ['huge', 'medium', 'small']
+        hand_s_list = ['huge_l', 'medium_s', 'small_l']
         return hand_s_list[index]
 
     def Body_HandClawSize(self, index):
-        handclaw_s_list = ['long', 'medium', 'small']
+        handclaw_s_list = ['long', 'medium_c', 'small_c']
         return handclaw_s_list[index]
 
     def Body_LegLength(self, index):
-        leg_l_list = ['long', 'medium', 'small']
+        leg_l_list = ['long_l', 'medium_l', 'small_l']
         return leg_l_list[index]
 
     def Body_FootSize(self, index):
-        foot_s_list = ['huge', 'medium', 'small']
+        foot_s_list = ['huge_l', 'medium_s', 'small_l']
         return foot_s_list[index]
 
     def Body_FootClawSize(self, index):
-        footclaw_s_list = ['long', 'medium', 'small']
+        footclaw_s_list = ['long_claw', 'medium_claw', 'small_claw']
         return footclaw_s_list[index]
 
     def Body_FootType(self, index):
-        foot_t_list = ['foot', ' cowhoof', 'elkhoof', 'goathoof', 'lionpaw', 'chicken']
+        foot_t_list = ['foot', 'cowhoof', 'elkhoof', 'goathoof', 'lionpaw', 'chicken']
         return foot_t_list[index]
 
     def Body_WingSize(self, index):
-        wing_s_list = ['tiny', 'small', 'medium', 'large' , 'huge']
+        wing_s_list = ['tiny_w', 'small_w', 'medium_w', 'large_w' , 'huge_w']
         return wing_s_list[index]
 
     def Body_TailLength(self, index):
-        tail_l_list = ['short', 'medium', 'long']
+        tail_l_list = ['short_tail', 'medium_tail', 'long_tail']
         return tail_l_list[index]
 
     def Body_General(self, switch_list):
