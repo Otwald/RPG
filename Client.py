@@ -23,7 +23,7 @@ def MonsterHandler():
         'long_l' : "lang", 'medium_l' : 'normal', 'small_l' : 'klein', 'huge_l' : 'groß', 'medium_s' : 'mittelgroß',  'medium_claw': 'durschnittlichen', 'small_claw' : 'kurzen','long_claw' : 'sehr langen',
         'cowhoof' : 'Kuhhufen', 'elkhoof' : 'Elchhufen', 'goathoof' : 'Ziegenhufen', 'lionpaw' : 'Löwenpfoten', 'chicken' : 'Hühnerfüßen',
         'tiny_w': 'winzige', 'small_w' : 'kleine', 'medium_w' : 'mittelgroße', 'large_w' : 'große' , 'huge_w' : 'riesige',
-        'short_tail' : 'kurz', 'medium_tail' : 'normal lang', 'long_tail' : 'lang'
+        'short_tail' : 'kurz', 'medium_tail' : 'normal lang', 'long_tail' : 'lang', 'medium_c' : 'durchschnittlichen'
         }
     # deutsch = {'skin_color': {'pale' : 'blasser' , 'peach' : 'weiße', 'olive' : 'gebräunter', 'brown' : 'brauner' , 'black' : 'schwarzer', 'purple': 'lila' , 
     #     'light_green' : 'grünlicher', 'dark_green' : 'dunkel grüner', 'blue' : 'blauer', 'red' : 'roter'}, 'body_type': { 'strong' : 'kräftigen',
@@ -102,7 +102,7 @@ def MonsterHandler():
 
 
     print( 'Es ist ein '+ deutsch[person_dict['race']] + ' mit ' + deutsch[person_dict['body']['skin_color']] + ' Hautfarbe. Es besitzt einen ' + 
-        deutsch[person_dict['body']['body_type']] + ' Körperbau und ist für die Art relativ ' + deutsch[person_dict['body']['body_size']] + '. Der Kopf ist eher ' +
+        deutsch[person_dict['body']['body_type']] + ' Körperbau und ist für die Art relativ ' + deutsch[person_dict['body']['body_size']] + ' . Der Kopf ist eher ' +
         deutsch[person_dict['body']['head']['form']] + ', mit '+ hair + '. Es blickt mit ' + deutsch[person_dict['body']['head']['eye_color']] + 
         ' Augen in die Welt. Es besitzt eine ' +  deutsch[person_dict['body']['head']['nose']] + ' Nase, ein ' + deutsch[person_dict['body']['head']['chin']] + ' Kinn, ' +
         ear  +  ' und ' + lips + tusk + horn + '. Die Arme sind im Verhältnis zum restlichen Körper eher ' + deutsch[person_dict['body']['limbs']['arm_length']] + 
