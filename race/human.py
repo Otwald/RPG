@@ -1,7 +1,7 @@
 from body import Body
 from body import Head
-
-# Body = bd.Body()
+from body import Limbs
+from body import Torso
 
 
 class Human(Body):
@@ -10,13 +10,16 @@ class Human(Body):
 
     def getHead(self):
         self.head = HumanHead()
-        self.head = self.head.getHead()
+        self.head = self.head.makeReturn()
 
-    def getLegs(self):
+    def getLimbs(self):
+        pass
+
+    def getTorso(self):
         pass
 
 
 class HumanHead(Head):
 
-    def getHead(self):
+    def makeReturn(self):
         return {'eyes': {'color': 'green'}}

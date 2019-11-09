@@ -5,14 +5,30 @@ class Body:
     def getHead(self):
         raise NotImplementedError
 
-    def getLegs(self):
+    def getLimbs(self):
+        raise NotImplementedError
+
+    def getTorso(self):
         raise NotImplementedError
 
     def genBody(self):
         self.getHead()
-        self.getLegs()
+        self.getLimbs()
+        self.getTorso
 
 
 class Head:
-    pass
+
+    def makeReturn(self):
+        raise NotImplementedError
+
+class Limbs:
+    
+    def makeReturn(self):
+        raise NotImplementedError
+
+class Torso:
+    
+    def makeReturn(self):
+        raise NotImplementedError
 

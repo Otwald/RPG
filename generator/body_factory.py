@@ -14,5 +14,5 @@ class BodyFactory:
         race = Monster_NumberGen(races)
         module = __import__('race')
         submodule = getattr(module, 'human')
-        raceClass = getattr(submodule, 'Human')+
+        raceClass = getattr(submodule, 'Human')
         return raceClass()
