@@ -6,54 +6,6 @@ from Random_Gen import Monster_NumberGen
 
 BG = Body_Gen()
 
-
-class BodyFactory:
-
-    def Monster_ArtGen(self) ->object:
-        races = ['Orcoid', 'Undead',
-                 'Human', 'Repte',
-                 'Demon']
-        race = Monster_NumberGen(races)
-        module = __import__('monster_gen')
-        raceClass = getattr(module, 'Human')
-        return raceClass()
-
-
-class Body:
-    """acts as an abstract Class for different Body generators
-    """
-
-    def getHead(self):
-        raise NotImplementedError
-
-    def getLegs(self):
-        raise NotImplementedError
-
-    def genBody(self):
-        self.getHead()
-        self.getLegs()
-
-
-class Human(Body):
-
-    def getHead(self):
-        self.head = HumanHead()
-        self.head = self.head.getHead()
-
-    def getLegs(self):
-        pass
-
-
-class Head():
-    pass
-
-
-class HumanHead(Head):
-
-    def getHead(self):
-        return {'eyes': {'color': 'green'}}
-
-
 class Monster_Gen:
 
     def Monster_SwitchHandler(self):

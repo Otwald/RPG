@@ -1,4 +1,4 @@
-from monster_gen import BodyFactory
+from generator import body_factory as bf
 
 
 class Person:
@@ -10,7 +10,7 @@ class Person:
     #     self.Equip = Equip()
 
     def generatePerson(self):
-        self.body = BodyFactory().Monster_ArtGen()
+        self.body = bf.BodyFactory().Monster_ArtGen()
         self.body.genBody()
 
 class Equip:
