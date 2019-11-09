@@ -14,7 +14,7 @@ class Body:
     def genBody(self):
         self.getHead()
         self.getLimbs()
-        self.getTorso
+        self.getTorso()
 
 
 class Head:
