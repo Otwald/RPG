@@ -40,7 +40,7 @@ class DataBase:
             raise mysql.connector.Error(err)
 
     @wrappMake
-    def makeRequest(self, query):
+    def makeRequest(self, query) ->dict:
         cur = self._buildConn()
         cur.execute(query)
         return dict(zip(cur.column_names, cur.fetchone()))
