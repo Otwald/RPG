@@ -1,91 +1,83 @@
 from alchemy import DbInterface
 
-from base import BodyTorso
-from base import BodyHead
-from base import BodyLimps
+from base import BodyPartTpl
 
 
 class BodyGen:
 
     db: DbInterface
-    bodypart : list
+    bodypart: list
 
     def __init__(self):
         self.db = DbInterface()
-        self.bodypart = [BodyTorso, BodyHead, BodyLimps]
+        self.bodypart = [self.bodyTorso, self.bodyHead, self.bodyLimbs]
 
-    def __initDB(self, tclass):
-        func = tclass.__tablename__
-        context = {}
-        if func == 'bodyTorso':
-            context = self.bodyTorso()
-        elif func == 'bodyHead':
-            context = self.bodyHead()
-        elif func == 'bodyLimps':
-            context = self.bodyLimbs()
-            length = 0
-            for key,value in context.items():
-                if length < len(value):
-                    length = len(value)
-                # print(len(value))
-            i = 0
-            while i < (length-1):
-                BodyLimps()
-    
+    def __initDB(self, tclass, context):
+        for item in context:
+            table = tclass(item)
+            print(table.__tablename__)
+            print(table.name)
+
     def checkDB(self):
         """calls the DB to check if DB was already created, if not calls a creator
         """
         for part in self.bodypart:
-            if not self.db.checkTable(part) :
-                self.__initDB(part)
+            for key, value in part().items():
+                temp = BodyPartTpl
+                temp.__tablename__ = key
+                if not self.db.checkTable(temp):
+                    self.__initDB(temp, value)
+                else:
+                    print('noo')
+            #     self.__initDB(part)
         # session = self.db.getSession()
 
     def bodyTorso(self):
         return {
-            'skin_c': ['pale', 'peach', 'olive', 'brown', 'black',
-                            'light_green', 'dark_green', 'blue', 'red', 'purple'],
-            'body_t': ['strong', 'muscular', 'slender',
-                            'athletic', 'thin', 'slim', 'chubby'],
-            'body_s': ['large', 'medium', 'small'],
-            'tail_l': ['short_tail', 'medium_tail', 'long_tail'],
-            'wing_s': ['tiny_w', 'small_w',
-                            'medium_w', 'large_w', 'huge_w']
+            'body_TorsoSkinC': ['pale', 'peach', 'olive', 'brown', 'black',
+                                'light_green', 'dark_green', 'blue', 'red', 'purple'],
+            'body_TorsoBodyT': ['strong', 'muscular', 'slender',
+                                'athletic', 'thin', 'slim', 'chubby'],
+            'body_TorsoBodyS': ['large', 'medium', 'small'],
+            'body_TorsoTailL': ['short_tail', 'medium_tail', 'long_tail'],
+            'body_TorsoWingS': ['tiny_w', 'small_w',
+                                'medium_w', 'large_w', 'huge_w']
         }
 
     def bodyHead(self):
         return {
-            'head_f': ['oval', 'long_h', 'round', 'angular'],
-            'eye_c': ['green_e', 'blue_e', 'brown_h', 'red_h', 'purple_e'],
-            'hair_l': ['short', 'chin-length',
-                            'shoulder-length', 'long', 'none'],
-            'hair_t': ['smooth', 'curly', 'frizzy'],
-            'hair_c': ['brown_h', 'black_h', 'blond_h', 'red_h'],
-            'nose_f': ['crooked', 'small_n', 'tall_n', 'pointed_n'],
-            'chin_f': ['energetic_c', 'pointed_c',
-                            'round_c', 'small_c', 'protruding_c'],
-            'ear_f': ['sticking_out_e', 'fitting_e',
-                           'pointy_e', 'pointy_ragged_e'],
-            'ear_s': ['big_e', 'small_e'],
-            'lip_f': ['thin_l', 'balanced_l', 'plump_l',
-                           'thin_upperlip_l', 'thin_lowerlip_l'],
-            'horn_s': ['tiny_h', 'small_h',
-                            'medium_h', 'large_h', 'giant_h'],
-            'horn_f': ['antlers', 'goat', 'straight', 'curved', 'hooked'],
-            'horn_n': ['none', '1', '2', '3', '4'],
-            'tusk_s': ['none_t', 'tiny_t', 'small_t',
-                            'medium_t', 'large_t', 'giant_T'],
+            'body_HeadHeadF': ['oval', 'long_h', 'round', 'angular'],
+            'body_HeadEyeC': ['green_e', 'blue_e', 'brown_h', 'red_h', 'purple_e'],
+            'body_HeadHairL': ['short', 'chin-length',
+                               'shoulder-length', 'long', 'none'],
+            'body_HeadHairT': ['smooth', 'curly', 'frizzy'],
+            'body_HeadHairC': ['brown_h', 'black_h', 'blond_h', 'red_h'],
+            'body_HeadNoseF': ['crooked', 'small_n', 'tall_n', 'pointed_n'],
+            'body_HeadChinF': ['energetic_c', 'pointed_c',
+                               'round_c', 'small_c', 'protruding_c'],
+            'body_HeadEarF': ['sticking_out_e', 'fitting_e',
+                              'pointy_e', 'pointy_ragged_e'],
+            'body_HeadEarS': ['big_e', 'small_e'],
+            'body_HeadLipF': ['thin_l', 'balanced_l', 'plump_l',
+                              'thin_upperlip_l', 'thin_lowerlip_l'],
+            'body_HeadHornS': ['tiny_h', 'small_h',
+                               'medium_h', 'large_h', 'giant_h'],
+            'body_HeadHornF': ['antlers', 'goat', 'straight', 'curved', 'hooked'],
+            'body_HeadHornN': ['none', '1', '2', '3', '4'],
+            'body_HeadTuskS': ['none_t', 'tiny_t', 'small_t',
+                               'medium_t', 'large_t', 'giant_T'],
         }
 
     def bodyLimbs(self):
         return {
-            'arm_l': ['long_l', 'medium_l', 'small_l'],
-            'hand_s': ['huge_l', 'medium_s', 'small_l'],
-            'handclaw_s': ['long', 'medium_c', 'small_c'],
-            'leg_l': ['long_l', 'medium_l', 'small_l'],
-            'foot_s': ['huge_l', 'medium_s', 'small_l'],
-            'footclaw_s': ['long_claw', 'medium_claw', 'small_claw'],
-            'foot_t': ['foot', 'cowhoof', 'elkhoof',
-                            'goathoof', 'lionpaw', 'chicken'],
+            'body_LimpsArmL': ['long_l', 'medium_l', 'small_l'],
+            'body_LimpsHandS': ['huge_l', 'medium_s', 'small_l'],
+            'body_LimpsHandclawS': ['long', 'medium_c', 'small_c'],
+            'body_LimpsLegL': ['long_l', 'medium_l', 'small_l'],
+            'body_LimpsFootS': ['huge_l', 'medium_s', 'small_l'],
+            'body_LimpsFootclawS': ['long_claw', 'medium_claw', 'small_claw'],
+            'body_LimpsFootT': ['foot', 'cowhoof', 'elkhoof',
+                                'goathoof', 'lionpaw', 'chicken'],
         }
 
     # def Body_General(self, switch_list):
