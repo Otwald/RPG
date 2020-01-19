@@ -43,6 +43,8 @@ class BodyGen:
         self.bodypart = [self.bodyTorso, self.bodyHead, self.bodyLimbs]
 
     def __initDB(self, tclass, context, session):
+        """populates the newly created table with context
+        """
         for item in context:
             table = tclass(item)
             # print(table)
@@ -56,16 +58,9 @@ class BodyGen:
             for key, value in part().items():
                 tableClass = self.baseTable[key]
                 if not self.db.checkTable(tableClass):
-                    print(value)
-                    # print('mäh')
-                    # self.db.createTable()
-                    # self.__initDB(temp, value, session)
-                else:
-                    pass
-                    # for row in session.query(BodyPartTpl).all():
-                    # print(row)
+                    self.db.createTable(tableClass)
+                    self.__initDB(tableClass, value, session)
         session.commit()
-        print(session)
         session.close()
 
     def bodyTorso(self):
