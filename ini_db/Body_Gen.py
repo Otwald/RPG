@@ -1,15 +1,45 @@
 from alchemy import DbInterface
 from sqlalchemy import Column, String, Integer, Table
 
-import base
+import base as b
+
 
 class BodyGen:
 
     db: DbInterface
     bodypart: list
+    baseTable: dict
 
     def __init__(self):
         self.db = DbInterface()
+        self.baseTable = {
+            b.BodyTorsoSkinC.__tablename__: b.BodyTorsoSkinC,
+            b.BodyTorsoBodyT.__tablename__: b.BodyTorsoBodyT,
+            b.BodyTorsoBodyS.__tablename__: b.BodyTorsoBodyS,
+            b.BodyTorsoTailL.__tablename__: b.BodyTorsoTailL,
+            b.BodyTorsoWingS.__tablename__: b.BodyTorsoWingS,
+            b.BodyHeadHeadF.__tablename__: b.BodyHeadHeadF,
+            b.BodyHeadEyeC.__tablename__: b.BodyHeadEyeC,
+            b.BodyHeadHairL.__tablename__: b.BodyHeadHairL,
+            b.BodyHeadHairT.__tablename__: b.BodyHeadHairT,
+            b.BodyHeadHairC.__tablename__: b.BodyHeadHairC,
+            b.BodyHeadNoseF.__tablename__: b.BodyHeadNoseF,
+            b.BodyHeadChinF.__tablename__: b.BodyHeadChinF,
+            b.BodyHeadEarF.__tablename__: b.BodyHeadEarF,
+            b.BodyHeadEarS.__tablename__: b.BodyHeadEarS,
+            b.BodyHeadLipF.__tablename__: b.BodyHeadLipF,
+            b.BodyHeadHornS.__tablename__: b.BodyHeadHornS,
+            b.BodyHeadHornF.__tablename__: b.BodyHeadHornF,
+            b.BodyHeadHornN.__tablename__: b.BodyHeadHornN,
+            b.BodyHeadTuskS.__tablename__: b.BodyHeadTuskS,
+            b.BodyLimpsArmL.__tablename__: b.BodyLimpsArmL,
+            b.BodyLimpsHandS.__tablename__: b.BodyLimpsHandS,
+            b.BodyLimpsHandclawS.__tablename__: b.BodyLimpsHandclawS,
+            b.BodyLimpsLegL.__tablename__: b.BodyLimpsLegL,
+            b.BodyLimpsFootS.__tablename__: b.BodyLimpsFootS,
+            b.BodyLimpsFootclawS.__tablename__: b.BodyLimpsFootclawS,
+            b.BodyLimpsFootT.__tablename__: b.BodyLimpsFootT,
+        }
         self.bodypart = [self.bodyTorso, self.bodyHead, self.bodyLimbs]
 
     def __initDB(self, tclass, context, session):
@@ -24,68 +54,66 @@ class BodyGen:
         session = self.db.getSession()
         for part in self.bodypart:
             for key, value in part().items():
-                if not self.db.checkTable(temp):
+                tableClass = self.baseTable[key]
+                if not self.db.checkTable(tableClass):
+                    print(value)
                     # print('mäh')
-                    bodyParts = Table(key, self.db.metadata,
-                                      Column('id', Integer, primary_key=True),
-                                      Column('name', String)
-                                      )
-                    self.db.createTable()
-                    self.__initDB(temp, value, session)
+                    # self.db.createTable()
+                    # self.__initDB(temp, value, session)
                 else:
                     pass
                     # for row in session.query(BodyPartTpl).all():
-                        # print(row)
+                    # print(row)
         session.commit()
         print(session)
         session.close()
 
     def bodyTorso(self):
         return {
-            'body_TorsoSkinC': ['pale', 'peach', 'olive', 'brown', 'black',
-                                'light_green', 'dark_green', 'blue', 'red', 'purple'],
-            'body_TorsoBodyT': ['strong', 'muscular', 'slender',
-                                'athletic', 'thin', 'slim', 'chubby'],
-            'body_TorsoBodyS': ['large', 'medium', 'small'],
-            'body_TorsoTailL': ['short_tail', 'medium_tail', 'long_tail'],
-            'body_TorsoWingS': ['tiny_w', 'small_w',
-                                'medium_w', 'large_w', 'huge_w']
+            b.BodyTorsoSkinC.__tablename__: ['pale', 'peach', 'olive', 'brown', 'black',
+                                             'light_green', 'dark_green', 'blue', 'red', 'purple'],
+            b.BodyTorsoBodyT.__tablename__: ['strong', 'muscular', 'slender',
+                                             'athletic', 'thin', 'slim', 'chubby'],
+            b.BodyTorsoBodyS.__tablename__: ['large', 'medium', 'small'],
+            b.BodyTorsoTailL.__tablename__: ['short_tail', 'medium_tail', 'long_tail'],
+            b.BodyTorsoWingS.__tablename__: ['tiny_w', 'small_w',
+                                             'medium_w', 'large_w', 'huge_w']
         }
 
     def bodyHead(self):
         return {
-            'body_HeadHeadF': ['oval', 'long_h', 'round', 'angular'],
-            'body_HeadEyeC': ['green_e', 'blue_e', 'brown_h', 'red_h', 'purple_e'],
-            'body_HeadHairL': ['short', 'chin-length',
-                               'shoulder-length', 'long', 'none'],
-            'body_HeadHairT': ['smooth', 'curly', 'frizzy'],
-            'body_HeadHairC': ['brown_h', 'black_h', 'blond_h', 'red_h'],
-            'body_HeadNoseF': ['crooked', 'small_n', 'tall_n', 'pointed_n'],
-            'body_HeadChinF': ['energetic_c', 'pointed_c',
-                               'round_c', 'small_c', 'protruding_c'],
-            'body_HeadEarF': ['sticking_out_e', 'fitting_e',
-                              'pointy_e', 'pointy_ragged_e'],
-            'body_HeadEarS': ['big_e', 'small_e'],
-            'body_HeadLipF': ['thin_l', 'balanced_l', 'plump_l',
-                              'thin_upperlip_l', 'thin_lowerlip_l'],
-            'body_HeadHornS': ['tiny_h', 'small_h',
-                               'medium_h', 'large_h', 'giant_h'],
-            'body_HeadHornF': ['antlers', 'goat', 'straight', 'curved', 'hooked'],
-            'body_HeadHornN': ['none', '1', '2', '3', '4'],
-            'body_HeadTuskS': ['none_t', 'tiny_t', 'small_t',
-                               'medium_t', 'large_t', 'giant_T'],
+            b.BodyHeadHeadF.__tablename__: ['oval', 'long_h', 'round', 'angular'],
+            b.BodyHeadEyeC.__tablename__: ['green_e', 'blue_e', 'brown_h', 'red_h', 'purple_e'],
+            b.BodyHeadHairL.__tablename__: ['short', 'chin-length',
+                                            'shoulder-length', 'long', 'none'],
+            b.BodyHeadHairT.__tablename__: ['smooth', 'curly', 'frizzy'],
+            b.BodyHeadHairC.__tablename__: ['brown_h', 'black_h', 'blond_h', 'red_h'],
+            b.BodyHeadNoseF.__tablename__: ['crooked', 'small_n', 'tall_n', 'pointed_n'],
+            b.BodyHeadChinF.__tablename__: ['energetic_c', 'pointed_c',
+                                            'round_c', 'small_c', 'protruding_c'],
+            b.BodyHeadEarF.__tablename__: ['sticking_out_e', 'fitting_e',
+                                           'pointy_e', 'pointy_ragged_e'],
+            b.BodyHeadEarS.__tablename__: ['big_e', 'small_e'],
+            b.BodyHeadLipF.__tablename__: ['thin_l', 'balanced_l', 'plump_l',
+                                           'thin_upperlip_l', 'thin_lowerlip_l'],
+            b.BodyHeadHornS.__tablename__: ['tiny_h', 'small_h',
+                                            'medium_h', 'large_h', 'giant_h'],
+            b.BodyHeadHornF.__tablename__: ['antlers', 'goat', 'straight', 'curved', 'hooked'],
+            b.BodyHeadHornN.__tablename__: ['none', '1', '2', '3', '4'],
+            b.BodyHeadTuskS.__tablename__: ['none_t', 'tiny_t', 'small_t',
+                                            'medium_t', 'large_t', 'giant_T'],
         }
 
     def bodyLimbs(self):
         return {
-            'body_LimpsArmL': ['long_l', 'medium_l', 'small_l'],
-            'body_LimpsHandS': ['huge_l', 'medium_s', 'small_l'],
-            'body_LimpsHandclawS': ['long', 'medium_c', 'small_c'],
-            'body_LimpsLegL': ['long_l', 'medium_l', 'small_l'],
-            'body_LimpsFootS': ['huge_l', 'medium_s', 'small_l'],
-            'body_LimpsFootclawS': ['long_claw', 'medium_claw', 'small_claw'],
-            'body_LimpsFootT': ['foot', 'cowhoof', 'elkhoof',
-                                'goathoof', 'lionpaw', 'chicken'],
+            b.BodyLimpsArmL.__tablename__: ['long_l', 'medium_l', 'small_l'],
+            b.BodyLimpsHandS.__tablename__: ['huge_l', 'medium_s', 'small_l'],
+            b.BodyLimpsHandclawS.__tablename__: ['long', 'medium_c', 'small_c'],
+            b.BodyLimpsLegL.__tablename__: ['long_l', 'medium_l', 'small_l'],
+            b.BodyLimpsFootS.__tablename__: ['huge_l', 'medium_s', 'small_l'],
+            b.BodyLimpsFootclawS.__tablename__: ['long_claw', 'medium_claw', 'small_claw'],
+            b.BodyLimpsFootT.__tablename__: ['foot', 'cowhoof', 'elkhoof',
+                                             'goathoof', 'lionpaw', 'chicken'],
         }
 
     # def Body_General(self, switch_list):
