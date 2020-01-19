@@ -1,7 +1,7 @@
 from alchemy import DbInterface
+from sqlalchemy import Column, String, Integer, Table
 
-from base import BodyPartTpl
-
+import base
 
 class BodyGen:
 
@@ -12,25 +12,33 @@ class BodyGen:
         self.db = DbInterface()
         self.bodypart = [self.bodyTorso, self.bodyHead, self.bodyLimbs]
 
-    def __initDB(self, tclass, context):
+    def __initDB(self, tclass, context, session):
         for item in context:
             table = tclass(item)
-            print(table.__tablename__)
-            print(table.name)
+            # print(table)
+            session.add(table)
 
     def checkDB(self):
         """calls the DB to check if DB was already created, if not calls a creator
         """
+        session = self.db.getSession()
         for part in self.bodypart:
             for key, value in part().items():
-                temp = BodyPartTpl
-                temp.__tablename__ = key
                 if not self.db.checkTable(temp):
-                    self.__initDB(temp, value)
+                    # print('mäh')
+                    bodyParts = Table(key, self.db.metadata,
+                                      Column('id', Integer, primary_key=True),
+                                      Column('name', String)
+                                      )
+                    self.db.createTable()
+                    self.__initDB(temp, value, session)
                 else:
-                    print('noo')
-            #     self.__initDB(part)
-        # session = self.db.getSession()
+                    pass
+                    # for row in session.query(BodyPartTpl).all():
+                        # print(row)
+        session.commit()
+        print(session)
+        session.close()
 
     def bodyTorso(self):
         return {
