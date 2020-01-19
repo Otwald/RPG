@@ -10,11 +10,10 @@ class MonsterGen:
     db: DbInterface
 
     def __init__(self):
-        # self.races = [self.Monster_Demon, self.Monster_Human,
-        #               self.Monster_Orcoid, self.Monster_Repte,
-        #               self.Monster_Undead
-        #               ]
-        self.races = [self.Monster_Orcoid]
+        self.races = [
+            self.Monster_Demon, self.Monster_Human, self.Monster_Undead,
+            self.Monster_Orcoid, self.Monster_Repte,
+        ]
         self.tables = [RaceTplTorso, RaceTplHead, RaceTplLimps]
         self.db = DbInterface()
 
@@ -58,207 +57,137 @@ class MonsterGen:
             self.__insertMapping(view, session)
         session.close()
 
-    def Monster_Orcoid(self):
-        skin_c_list = '4, 5, 6, 7'
-        body_t_list = '0, 1, 2, 3, 4, 6'
-        body_s_list = '0, 1, 2'
-        headform_list = '2, 3'
-        eye_list = '0, 2, 3'
-        hair_l_list = '0, 4'
-        hair_t_list = '1, 2'
-        hair_c_list = '0, 1'
-        nose_list = '0, 1, 2'
-        chin_list = '0, 1, 2, 3, 4'
-        ear_f_list = '2, 3'
-        ear_s_list = '0, 1'
-        lip_f_list = '0, 1'
-        tusk_s_list = '0, 1, 2, 3, 4, 5'
-        body_dict = {'SkinC': skin_c_list, 'BodyT': body_t_list,
-                     'BodyS': body_s_list, 'WingS': None, 'TailL': None}
-        head_dict = {'HeadF': headform_list, 'EyeC': eye_list, 'NoseF': nose_list, 'ChinF': chin_list, 'LipF': lip_f_list,
-                     'EarF': ear_f_list, 'EarS': ear_s_list,
-                     'HairL': hair_l_list, 'HairT': hair_t_list, 'HairC': hair_c_list,
-                     'HornN': None, 'HornS':  None, 'HornF': None,
-                     'TuskS': tusk_s_list}
-        limbs_dict = {'ArmL': '0, 1, 2', 'HandS': '0, 1, 2', 'HandclawS': '0, 1, 2',
-                      'LegL': '0, 1, 2', 'FootS': '0, 1, 2', 'FootclawS': '0, 1, 2', 'FootT': '0'}
+    def Monster_Orcoid(self) -> list:
+        body_dict = {
+            'SkinC': '4, 5, 6, 7', 'BodyT': '0, 1, 2, 3, 4, 6',
+            'BodyS': '0, 1, 2', 'WingS': None, 'TailL': None
+        }
+        head_dict = {
+            'HeadF': '2, 3', 'EyeC': '0, 2, 3', 'NoseF': '0, 1, 2',
+            'ChinF': '0, 1, 2, 3, 4', 'LipF': '0, 1',
+            'EarF': '2, 3', 'EarS': '0, 1',
+            'HairL': '0, 4', 'HairT': '1, 2', 'HairC': '0, 1',
+            'HornN': None, 'HornS':  None, 'HornF': None,
+            'TuskS': '0, 1, 2, 3, 4, 5'
+        }
+        limbs_dict = {
+            'ArmL': '0, 1, 2', 'HandS': '0, 1, 2',
+            'HandclawS': '0, 1, 2', 'LegL': '0, 1, 2', 'FootS': '0, 1, 2',
+            'FootclawS': '0, 1, 2', 'FootT': '0'
+        }
         race = 'Orc'
 
-        input_list = {RaceTplTorso.__tablename__: body_dict,
-                      RaceTplHead.__tablename__: head_dict, RaceTplLimps.__tablename__: limbs_dict}
+        input_list = {
+            RaceTplTorso.__tablename__: body_dict,
+            RaceTplHead.__tablename__: head_dict,
+            RaceTplLimps.__tablename__: limbs_dict
+        }
 
         return race, input_list
 
-    def Monster_Undead(self):
-        skin_c_list = '1, 2, 3, 5'
-        body_t_list = '0, 1, 2, 3, 4, 5, 6'
-        body_s_list = '0, 1, 2'
-        headform_list = '0, 1, 2, 3'
-        eye_list = '0, 1, 2'
-        hair_l_list = '0, 1, 2, 3, 4'
-        hair_t_list = '0, 1, 2'
-        hair_c_list = '0, 1, 2, 3'
-        nose_list = '0, 1, 2, 3'
-        chin_list = '0, 1, 2, 3, 4'
-        ear_f_list = '0, 1'
-        ear_s_list = '0, 1'
-        lip_f_list = '0, 1, 2, 3, 4'
-        arm_l_list, hand_s_list, handclaw_s_list, leg_l_list, foot_s_list, footclaw_s_list = \
-            '0, 1, 2', '0, 1, 2', '0, 1, 2', '0, 1, 2', '0, 1, 2', '0, 1, 2'
-        foot_t_list = '0'
-        body_dict = {'SkinC': skin_c_list, 'BodyT': body_t_list,
-                     'BodyS': body_s_list, 'WingS': None, 'TailL': None}
-        head_dict = {'HeadF': headform_list, 'EyeC': eye_list, 'NoseF': nose_list, 'ChinF': chin_list, 'LipF': lip_f_list,
-                     'EarF': ear_f_list, 'EarS': ear_s_list,
-                     'HairL': hair_l_list, 'HairT': hair_t_list, 'HairC': hair_c_list,
-                     'HornN': None, 'HornS':  None, 'HornF': None,
-                     'TuskS': None}
-        limbs_dict = {'ArmL': arm_l_list, 'HandS': hand_s_list, 'HandclawS': handclaw_s_list,
-                      'LegL': leg_l_list, 'FootS': foot_s_list, 'FootclawS': footclaw_s_list, 'FootT': foot_t_list}
+    def Monster_Undead(self) -> list:
+        body_dict = {
+            'SkinC': '1, 2, 3, 5', 'BodyT': '0, 1, 2, 3, 4, 5, 6',
+            'BodyS': '0, 1, 2', 'WingS': None, 'TailL': None
+        }
+        head_dict = {
+            'HeadF': '0, 1, 2, 3', 'EyeC': '0, 1, 2',
+            'NoseF': '0, 1, 2, 3', 'ChinF': '0, 1, 2, 3, 4', 'LipF': '0, 1, 2, 3, 4',
+            'EarF': '0, 1', 'EarS': '0, 1',
+            'HairL': '0, 1, 2, 3, 4', 'HairT': '0, 1, 2', 'HairC': '0, 1, 2, 3',
+            'HornN': None, 'HornS':  None, 'HornF': None,
+            'TuskS': None
+        }
+        limbs_dict = {
+            'ArmL': '0, 1, 2', 'HandS':  '0, 1, 2', 'HandclawS':  '0, 1, 2',
+            'LegL':  '0, 1, 2', 'FootS': '0, 1, 2', 'FootclawS': '0, 1, 2', 'FootT': '0'
+        }
+        race = 'Undead'
+
+        input_list = {
+            RaceTplTorso.__tablename__: body_dict,
+            RaceTplHead.__tablename__: head_dict,
+            RaceTplLimps.__tablename__: limbs_dict
+        }
+
+        return race, input_list
+
+    def Monster_Human(self) -> list:
+        body_dict = {
+            'SkinC': '0, 1, 2, 3, 4', 'BodyT': '0, 1, 2, 3, 4, 5, 6',
+            'BodyS': '0, 1, 2', 'WingS': None, 'TailL': None
+        }
+        head_dict = {
+            'HeadF': '0, 1, 2, 3', 'EyeC': '0, 1, 2', 'NoseF': '0, 1, 2, 3',
+            'ChinF': '0, 1, 2, 3, 4', 'LipF': '0, 1, 2, 3, 4',
+            'EarF': '0, 1', 'EarS': '0, 1',
+            'HairL': '0, 1, 2, 3, 4', 'HairT': '0, 1, 2', 'HairC': '0, 1, 2, 3',
+            'HornN': None, 'HornS':  None, 'HornF': None,
+            'TuskS': None
+        }
+        limbs_dict = {
+            'ArmL': '0, 1, 2', 'HandS': '0, 1, 2', 'HandclawS': '0, 1, 2',
+            'LegL': '0, 1, 2', 'FootS': '0, 1, 2', 'FootclawS': '0, 1, 2', 'FootT': '0'
+        }
         race = 'Human'
 
-        input_list = {RaceTplTorso.__tablename__: body_dict,
-                      RaceTplHead.__tablename__: head_dict, RaceTplLimps.__tablename__: limbs_dict}
-
+        input_list = {
+            RaceTplTorso.__tablename__: body_dict,
+            RaceTplHead.__tablename__: head_dict,
+            RaceTplLimps.__tablename__: limbs_dict
+        }
         return race, input_list
 
-    def Monster_Human(self):
-        skin_c_list = '0, 1, 2, 3, 4'
-        body_t_list = '0, 1, 2, 3, 4, 5, 6'
-        body_s_list = '0, 1, 2'
-        headform_list = '0, 1, 2, 3'
-        eye_list = '0, 1, 2'
-        hair_l_list = '0, 1, 2, 3, 4'
-        hair_t_list = '0, 1, 2'
-        hair_c_list = '0, 1, 2, 3'
-        nose_list = '0, 1, 2, 3'
-        chin_list = '0, 1, 2, 3, 4'
-        ear_f_list = '0, 1'
-        ear_s_list = '0, 1'
-        lip_f_list = '0, 1, 2, 3, 4'
-        arm_l_list, hand_s_list, handclaw_s_list, leg_l_list, foot_s_list, footclaw_s_list = '0, 1, 2',
-        '0, 1, 2', '0, 1, 2', '0, 1, 2', '0, 1, 2', '0, 1, 2'
-        foot_t_list = '0'
-        body_dict = {'SkinC': skin_c_list, 'BodyT': body_t_list,
-                     'BodyS': body_s_list, 'WingS': None, 'TailL': None}
-        head_dict = {'HeadF': headform_list, 'EyeC': eye_list, 'NoseF': nose_list, 'ChinF': chin_list, 'LipF': lip_f_list,
-                     'EarF': ear_f_list, 'EarS': ear_s_list,
-                     'HairL': hair_l_list, 'HairT': hair_t_list, 'HairC': hair_c_list,
-                     'HornN': None, 'HornS':  None, 'HornF': None,
-                     'TuskS': None}
-        limbs_dict = {'ArmL': arm_l_list, 'HandS': hand_s_list, 'HandclawS': handclaw_s_list,
-                      'LegL': leg_l_list, 'FootS': foot_s_list, 'FootclawS': footclaw_s_list, 'FootT': foot_t_list}
-        race = 'Human'
-
-        input_list = {RaceTplTorso.__tablename__: body_dict,
-                      RaceTplHead.__tablename__: head_dict, RaceTplLimps.__tablename__: limbs_dict}
-        return race, input_list
-
-    def Monster_Repte(self):
-        skin_c_list = '3, 4, 5, 6, 7, 8'
-        body_t_list = '0, 1, 2, 3, 4, 5, 6'
-        body_s_list = '0, 1, 2'
-        headform_list = '0, 1, 2, 3'
-        eye_list = '0, 1, 3'
-        nose_list = '0, 1, 2, 3'
-        chin_list = '0, 1, 2, 3, 4'
-        # ear_f_list = '0,1'
-        ear_s_list = '0, 1'
-        horn_n_list = '0, 1, 2, 3'
-        horn_s_list = '0, 1, 2'
-        horn_f_list = '2, 3, 4'
-        foot_t_list = '0'
-        arm_l_list, hand_s_list, handclaw_s_list, leg_l_list, foot_s_list, footclaw_s_list = '0, 1, 2',
-        '0, 1, 2', '0, 1, 2', '0, 1, 2', '0, 1, 2', '0, 1, 2'
-        tail_l_list = '0, 1, 2'
-        body_dict = {'SkinC': skin_c_list, 'BodyT': body_t_list,
-                     'BodyS': body_s_list, 'WingS': None, 'TailL': tail_l_list}
-        head_dict = {'HeadF': headform_list, 'EyeC': eye_list, 'NoseF': nose_list, 'ChinF': chin_list, 'LipF': None,
-                     'EarF': None, 'EarS': ear_s_list,
-                     'HairL': None, 'HairT': None, 'HairC': None,
-                     'HornN': horn_n_list, 'HornS':  horn_s_list, 'HornF': horn_f_list,
-                     'TuskS': None}
-        limbs_dict = {'ArmL': arm_l_list, 'HandS': hand_s_list, 'HandclawS': handclaw_s_list,
-                      'LegL': leg_l_list, 'FootS': foot_s_list, 'FootclawS': footclaw_s_list, 'FootT': foot_t_list}
+    def Monster_Repte(self) -> list:
+        body_dict = {
+            'SkinC': '3, 4, 5, 6, 7, 8', 'BodyT': '0, 1, 2, 3, 4, 5, 6',
+            'BodyS': '0, 1, 2', 'WingS': None, 'TailL': '0, 1, 2'
+        }
+        head_dict = {
+            'HeadF': '0, 1, 2, 3', 'EyeC': '0, 1, 3', 'NoseF': '0, 1, 2, 3',
+            'ChinF': '0, 1, 2, 3, 4', 'LipF': None,
+            'EarF': None, 'EarS': '0, 1',
+            'HairL': None, 'HairT': None, 'HairC': None,
+            'HornN': '0, 1, 2, 3', 'HornS':  '0, 1, 2', 'HornF': '2, 3, 4',
+            'TuskS': None
+        }
+        limbs_dict = {
+            'ArmL': '0, 1, 2', 'HandS': '0, 1, 2', 'HandclawS':  '0, 1, 2',
+            'LegL': '0, 1, 2', 'FootS': '0, 1, 2', 'FootclawS': '0, 1, 2', 'FootT': '0'
+        }
         race = 'Lizardmen'
 
-        input_list = {RaceTplTorso.__tablename__: body_dict,
-                      RaceTplHead.__tablename__: head_dict, RaceTplLimps.__tablename__: limbs_dict}
+        input_list = {
+            RaceTplTorso.__tablename__: body_dict,
+            RaceTplHead.__tablename__: head_dict,
+            RaceTplLimps.__tablename__: limbs_dict
+        }
 
         return race, input_list
 
-    def Monster_Demon(self):
-        skin_c_list = '1, 2, 9, 4'
-        body_t_list = '0, 1, 2, 3, 4'
-        body_s_list = '0, 1, 2'
-        headform_list = '0, 1, 2, 3'
-        eye_list = '0, 1, 2, 3, 4'
-        hair_l_list = '0, 1, 2, 3, 4'
-        hair_t_list = '0, 1, 2'
-        hair_c_list = '0, 1, 2, 3'
-        nose_list = '0, 1, 2, 3'
-        chin_list = '0, 1, 2, 3, 4'
-        ear_f_list = '0, 1'
-        ear_s_list = '0, 1'
-        lip_f_list = '0'
-        horn_n_list = '1, 2, 3'
-        horn_f_list = '1, 2, 3, 4'
-        horn_s_list = '0, 1, 2, 3, 4'
-        arm_l_list, hand_s_list, handclaw_s_list, leg_l_list, foot_s_list, footclaw_s_list = '0, 1, 2',
-        '0, 1, 2', '0, 1, 2', '0, 1, 2', '0, 1, 2', '0, 1, 2'
-        foot_t_list = '0, 1, 2, 3, 4, 5'
-        wing_s_list = '0, 1, 2, 3, 4'
-        tail_l_list = '0, 1, 2'
-        body_dict = {'SkinC': skin_c_list, 'BodyT': body_t_list,
-                     'BodyS': body_s_list, 'WingS': wing_s_list, 'TailL': tail_l_list}
-        head_dict = {'HeadF': headform_list, 'EyeC': eye_list, 'NoseF': nose_list, 'ChinF': chin_list, 'LipF': lip_f_list,
-                     'EarF': ear_f_list, 'EarS': ear_s_list,
-                     'HairL': hair_l_list, 'HairT': hair_t_list, 'HairC': hair_c_list,
-                     'HornN': horn_n_list, 'HornS':  horn_s_list, 'HornF': horn_f_list,
-                     'TuskS': None}
-        limbs_dict = {'ArmL': arm_l_list, 'HandS': hand_s_list, 'HandclawS': handclaw_s_list,
-                      'LegL': leg_l_list, 'FootS': foot_s_list, 'FootclawS': footclaw_s_list, 'FootT': foot_t_list}
+    def Monster_Demon(self) -> list:
+        body_dict = {
+            'SkinC': '1, 2, 9, 4', 'BodyT': '0, 1, 2, 3, 4',
+            'BodyS': '0, 1, 2', 'WingS': '0, 1, 2, 3, 4', 'TailL': '0, 1, 2'
+        }
+        head_dict = {
+            'HeadF':  '0, 1, 2, 3', 'EyeC': '0, 1, 2, 3, 4',
+            'NoseF': '0, 1, 2, 3', 'ChinF': '0, 1, 2, 3, 4', 'LipF': '0',
+            'EarF': '0, 1', 'EarS': '0, 1',
+            'HairL': '0, 1, 2, 3, 4', 'HairT': '0, 1, 2', 'HairC': '0, 1, 2, 3',
+            'HornN': '1, 2, 3', 'HornS':  '0, 1, 2, 3, 4', 'HornF': '1, 2, 3, 4',
+            'TuskS': None
+        }
+        limbs_dict = {
+            'ArmL': '0, 1, 2', 'HandS': '0, 1, 2', 'HandclawS': '0, 1, 2',
+            'LegL': '0, 1, 2', 'FootS': '0, 1, 2', 'FootclawS': '0, 1, 2', 'FootT': '0, 1, 2, 3, 4, 5'
+        }
         race = 'Demonkin'
 
-        input_list = {RaceTplTorso.__tablename__: body_dict,
-                      RaceTplHead.__tablename__: head_dict, RaceTplLimps.__tablename__: limbs_dict}
+        input_list = {
+            RaceTplTorso.__tablename__: body_dict,
+            RaceTplHead.__tablename__: head_dict,
+            RaceTplLimps.__tablename__: limbs_dict
+        }
 
         return race, input_list
-
-    # def Monster_Head(self, head):
-
-    #     if head''HairL'] != None and head''HairL'] != 'none':
-    #         hair= {'length': head['HairL'],
-    #                 'type': head['HairT'], 'color': head['HairC']}
-    #     else:
-    #         hair = None
-
-    #     if head['EarF'] != None:
-    #         ear = {'form': head['EarF'], 'size': head['EarS']}
-    #     else:
-    #         ear = None
-
-    #     if head['HornN'] == None:
-    #         horn = None
-    #     else:
-    #         horn = {'HornN': head['HornN'],
-    #                 'size': head['HornS'], 'form': head['HornF']}
-
-    #     if head['TuskS'] == None:
-    #         tusk = None
-    #     else:
-    #         tusk = {'size': head['TuskS']}
-
-    #     head_dict = {'form': head['HeadF'], 'EyeC': head['EyeC'],
-    #                  'hair': hair,
-    #                  'horn': horn,
-    #                  'NoseF': head['NoseF'], 'ChinF': head['ChinF'],
-    #                  'ear': ear,
-    #                  'LipF': head['LipF'], 'tusk': tusk}
-
-    #     return head_dict
-
-    # def Monster_limbs(self, limbs):
-    #     limbs_dict = {'ArmL': limbs['ArmL'], 'hand': {'size': limbs['HandS'], 'claw_size': limbs['HandclawS']},
-    #                   'LegL': limbs['LegL'], 'foot': {'size': limbs['FootS'], 'claw_size': limbs['FootclawS'], 'type': limbs['FootT']}}
-    #     return limbs_dict
