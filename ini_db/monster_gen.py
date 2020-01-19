@@ -56,8 +56,6 @@ class MonsterGen:
         if view:
             self.db.createTable(Race)
             self.__insertMapping(view, session)
-        for row in session.query(Race):
-            print(row.__dict__)
         session.close()
 
     def Monster_Orcoid(self):
