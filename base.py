@@ -3,6 +3,99 @@ from sqlalchemy import Column, String, Integer, Date
 
 Base = declarative_base()
 
+
+class RaceTplTorso(Base):
+    __tablename__ = 'race_TplTorso'
+
+    id = Column(Integer, primary_key=True)
+    SkinC = Column(String)
+    BodyT = Column(String)
+    BodyS = Column(String)
+    TailL = Column(String)
+    WingS = Column(String)
+
+    def __init__(self, SkinC, BodyT, BodyS, TailL, WingS):
+        self.SkinC = SkinC
+        self.BodyT = BodyT
+        self.BodyS = BodyS
+        self.TailL = TailL
+        self.WingS = WingS
+
+
+class RaceTplHead(Base):
+    __tablename__ = 'race_TplHead'
+
+    id = Column(Integer, primary_key=True)
+    race = Column(String)
+    HeadF = Column(String)
+    EyeC = Column(String)
+    HairL = Column(String)
+    HairT = Column(String)
+    HairC = Column(String)
+    NoseF = Column(String)
+    ChinF = Column(String)
+    EarF = Column(String)
+    EarS = Column(String)
+    LipF = Column(String)
+    HornS = Column(String)
+    HornF = Column(String)
+    HornN = Column(String)
+    TuskS = Column(String)
+
+    def __init__(
+            self,
+            race,
+            HeadF,
+            EyeC,
+            HairL,
+            HairT,
+            HairC,
+            NoseF,
+            ChinF,
+            EarF,
+            EarS,
+            LipF,
+            HornS,
+            HornF,
+            HornN,
+            TuskS
+    ):
+        self.race = race
+        self.HeadF = HeadF
+        self.EyeC = EyeC
+        self.HairL = HairL
+        self.HairT = HairT
+        self.HairC = HairC
+        self.NoseF = NoseF
+        self.ChinF = ChinF
+        self.EarF = EarF
+        self.EarS = EarS
+        self.LipF = LipF
+        self.HornS = HornS
+        self.HornF = HornF
+        self.HornN = HornN
+        self.TuskS = TuskS
+
+class RaceTplLimps(Base):
+
+    id = Column(Integer, primary_key = True)
+    ArmL = Column(String)
+    HandS = Column(String)
+    HandclawS = Column(String)
+    LegL = Column(String)
+    FootS = Column(String)
+    FootclawS = Column(String)
+    FootT = Column(String)
+
+    def __init__(self, ArmL,HandS,HandclawS,LegL,FootS,FootclawS,FootT):
+        self.ArmL = ArmL
+        self.HandS = HandS
+        self.HandclawS = HandclawS
+        self.LegL = LegL
+        self.FootS = FootS
+        self.FootclawS = FootclawS
+        self.FootT = FootT
+
 class BodyTorsoSkinC(Base):
     __tablename__ = 'body_TorsoSkinC'
 
@@ -242,6 +335,7 @@ class BodyLimpsFootS(Base):
     def __init__(self, name):
         self.name = name
 
+
 class BodyLimpsFootclawS(Base):
     __tablename__ = 'body_LimpsFootclawS'
 
@@ -250,6 +344,7 @@ class BodyLimpsFootclawS(Base):
 
     def __init__(self, name):
         self.name = name
+
 
 class BodyLimpsFootT(Base):
     __tablename__ = 'body_LimpsFootT'
