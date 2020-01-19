@@ -1,6 +1,6 @@
 
 from alchemy import DbInterface
-from base import RaceTplTorso, RaceTplHead, RaceTplLimps
+from base import RaceTplTorso, RaceTplHead, RaceTplLimps, Race, Base
 
 
 class MonsterGen:
@@ -18,27 +18,46 @@ class MonsterGen:
         self.tables = [RaceTplTorso, RaceTplHead, RaceTplLimps]
         self.db = DbInterface()
 
-    def __insertEntry(self, tclass, context, race, session):
+    def __insertEntry(self, tclass: Base, context: dict, race: str, session) -> Base:
         """populates the newly created table with context
         """
-        session.add(tclass(race=race, **context))
+        initclass = tclass(race=race, **context)
+        session.add(initclass)
+        return initclass
 
-    def checkDB(self):
+    def __insertMapping(self, view: dict, session) -> None:
+        """creates an entry for the race mapping
+        """
+        for key, value in view.items():
+            torso, head, limps = value
+            session.add(Race(key, torso, head, limps))
+        session.commit()
+
+    def checkDB(self) -> None:
         """calls the DB to check if DB was already created, if not calls a creator
         """
+        view = {}
         session = self.db.getSession()
         for tableClass in self.tables:
             if not self.db.checkTable(tableClass):
                 self.db.createTable(tableClass)
                 for race in self.races:
                     name, body = race()
-                    self.__insertEntry(
+                    initclass = self.__insertEntry(
                         tableClass,
                         body[tableClass.__tablename__],
                         name,
                         session
                     )
-        session.commit()
+                    session.commit()
+                    if name not in view:
+                        view[name] = []
+                    view[name].append(initclass.id)
+        if view:
+            self.db.createTable(Race)
+            self.__insertMapping(view, session)
+        for row in session.query(Race):
+            print(row.__dict__)
         session.close()
 
     def Monster_Orcoid(self):
