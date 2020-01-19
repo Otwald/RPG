@@ -76,9 +76,11 @@ class RaceTplHead(Base):
         self.HornN = HornN
         self.TuskS = TuskS
 
-class RaceTplLimps(Base):
 
-    id = Column(Integer, primary_key = True)
+class RaceTplLimps(Base):
+    __tablename__ = 'race_TplLimps'
+
+    id = Column(Integer, primary_key=True)
     ArmL = Column(String)
     HandS = Column(String)
     HandclawS = Column(String)
