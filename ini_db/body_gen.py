@@ -41,15 +41,14 @@ class BodyGen:
         }
         self.bodypart = [self.bodyTorso, self.bodyHead, self.bodyLimbs]
 
-    def __initDB(self, tclass, context, session):
+    def __insertEntry(self, tclass: b.Base, context: list, session) -> None:
         """populates the newly created table with context
         """
         for item in context:
             table = tclass(item)
-            # print(table)
             session.add(table)
 
-    def checkDB(self):
+    def checkDB(self) -> None:
         """calls the DB to check if DB was already created, if not calls a creator
         """
         session = self.db.getSession()
@@ -58,11 +57,11 @@ class BodyGen:
                 tableClass = self.baseTable[key]
                 if not self.db.checkTable(tableClass):
                     self.db.createTable(tableClass)
-                    self.__initDB(tableClass, value, session)
+                    self.__insertEntry(tableClass, value, session)
         session.commit()
         session.close()
 
-    def bodyTorso(self):
+    def bodyTorso(self) -> dict:
         return {
             b.BodyTorsoSkinC.__tablename__: ['pale', 'peach', 'olive', 'brown', 'black',
                                              'light_green', 'dark_green', 'blue', 'red', 'purple'],
@@ -74,7 +73,7 @@ class BodyGen:
                                              'medium_w', 'large_w', 'huge_w']
         }
 
-    def bodyHead(self):
+    def bodyHead(self) -> dict:
         return {
             b.BodyHeadHeadF.__tablename__: ['oval', 'long_h', 'round', 'angular'],
             b.BodyHeadEyeC.__tablename__: ['green_e', 'blue_e', 'brown_h', 'red_h', 'purple_e'],
@@ -98,7 +97,7 @@ class BodyGen:
                                             'medium_t', 'large_t', 'giant_T'],
         }
 
-    def bodyLimbs(self):
+    def bodyLimbs(self) -> dict:
         return {
             b.BodyLimpsArmL.__tablename__: ['long_l', 'medium_l', 'small_l'],
             b.BodyLimpsHandS.__tablename__: ['huge_l', 'medium_s', 'small_l'],

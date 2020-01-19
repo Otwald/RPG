@@ -8,13 +8,22 @@ class RaceTplTorso(Base):
     __tablename__ = 'race_TplTorso'
 
     id = Column(Integer, primary_key=True)
+    race = Column(String)
     SkinC = Column(String)
     BodyT = Column(String)
     BodyS = Column(String)
     TailL = Column(String)
     WingS = Column(String)
 
-    def __init__(self, SkinC, BodyT, BodyS, TailL, WingS):
+    def __init__(self,
+                 race: str = '',
+                 SkinC: str = '',
+                 BodyT: str = '',
+                 BodyS: str = '',
+                 TailL: str = '',
+                 WingS: str = ''
+                 ):
+        self.race = race
         self.SkinC = SkinC
         self.BodyT = BodyT
         self.BodyS = BodyS
@@ -44,21 +53,21 @@ class RaceTplHead(Base):
 
     def __init__(
             self,
-            race,
-            HeadF,
-            EyeC,
-            HairL,
-            HairT,
-            HairC,
-            NoseF,
-            ChinF,
-            EarF,
-            EarS,
-            LipF,
-            HornS,
-            HornF,
-            HornN,
-            TuskS
+            race: str = '',
+            HeadF: str = '',
+            EyeC: str = '',
+            HairL: str = '',
+            HairT: str = '',
+            HairC: str = '',
+            NoseF: str = '',
+            ChinF: str = '',
+            EarF: str = '',
+            EarS: str = '',
+            LipF: str = '',
+            HornS: str = '',
+            HornF: str = '',
+            HornN: str = '',
+            TuskS: str = ''
     ):
         self.race = race
         self.HeadF = HeadF
@@ -81,6 +90,7 @@ class RaceTplLimps(Base):
     __tablename__ = 'race_TplLimps'
 
     id = Column(Integer, primary_key=True)
+    race = Column(String)
     ArmL = Column(String)
     HandS = Column(String)
     HandclawS = Column(String)
@@ -89,7 +99,17 @@ class RaceTplLimps(Base):
     FootclawS = Column(String)
     FootT = Column(String)
 
-    def __init__(self, ArmL,HandS,HandclawS,LegL,FootS,FootclawS,FootT):
+    def __init__(self,
+                 race: str = '',
+                 ArmL: str = '',
+                 HandS: str = '',
+                 HandclawS: str = '',
+                 LegL: str = '',
+                 FootS: str = '',
+                 FootclawS: str = '',
+                 FootT: str = ''
+                 ):
+        self.race = race
         self.ArmL = ArmL
         self.HandS = HandS
         self.HandclawS = HandclawS
@@ -97,6 +117,7 @@ class RaceTplLimps(Base):
         self.FootS = FootS
         self.FootclawS = FootclawS
         self.FootT = FootT
+
 
 class BodyTorsoSkinC(Base):
     __tablename__ = 'body_TorsoSkinC'
