@@ -1,49 +1,50 @@
-import random
-from Body_Gen import Body_Gen
 
-from Random_Gen import Monster_NumberGen
+from alchemy import DbInterface as Db
+from base import RaceTplTorso, RaceTplHead, RaceTplLimps
 
+class MonsterGen:
 
-BG = Body_Gen()
+    def checkDB(self):
+        """calls the DB to check if DB was already created, if not calls a creator
+        """
+        print('test')
 
-class Monster_Gen:
+    # def Monster_SwitchHandler(self):
 
-    def Monster_SwitchHandler(self):
+    #     output_list = []
+    #     for item in input_list:
+    #         item = BG.Body_General(item)
+    #         output_list.append(item)
+    #     head_dict = self.Monster_Head(output_list[1])
+    #     limbs_dict = self.Monster_limbs(output_list[2])
 
-        output_list = []
-        for item in input_list:
-            item = BG.Body_General(item)
-            output_list.append(item)
-        head_dict = self.Monster_Head(output_list[1])
-        limbs_dict = self.Monster_limbs(output_list[2])
-
-        body_dict = {'skin_color': output_list[0]['skin_color'], 'body_type': output_list[0]['body_type'], 'body_size': output_list[0]['body_size'],
-                     'head': head_dict, 'limbs': limbs_dict, 'wing_size': output_list[0]['wing_size'], 'tail_length': output_list[0]['tail_length']}
-        return race, body_dict
-        count = 0
-        # for item in over_list:
-        #     item_list = BG.Body_General(item, count)
-        #     item_list.append(self.Monster_NumberGen(item_list))
-        #     count = count + 1
-        # if horn:
-        #     item_list = BG.Body_General(head_list, 'head')
-        #     head_dict = {'form' : item_list[0], 'eye_color' : item_list[1] ,
-        #     'hair': {'lengt': item_list[2], 'type': item_list[3], 'color': item_list[4]},
-        #     'horn' : {'pair_number' : item_list[10], 'horn_size' : item_list[11], 'horn_form' : item_list[12]},
-        #     'nose': item_list[5], 'chin': item_list[6],
-        #     'ear': {'form': item_list[7], 'size': item_list[8]},
-        #     'lip_form': item_list[9]}
-        # else:
-        #     pass
-        person_dict = {'race': race, 'body': body_dict}
-        # person ={'race': race , 'body' : {'skin_color' : item_list[0], 'body_type': item_list[1]},
-        #     'head': {'form' : item_list[2], 'eye_color' : item_list[3] ,
-        #     'hair': {'lengt': item_list[4], 'type': item_list[5], 'color': item_list[6]},
-        #     'nose': item_list[7], 'chin': item_list[8],
-        #     'ear': {'form': item_list[9], 'size': item_list[10]},
-        #     'lip_form': item_list[11]}}
-        print(person_dict)
-        #print ( 'Es ist ein' + person['race'])
+    #     body_dict = {'skin_color': output_list[0]['skin_color'], 'body_type': output_list[0]['body_type'], 'body_size': output_list[0]['body_size'],
+    #                  'head': head_dict, 'limbs': limbs_dict, 'wing_size': output_list[0]['wing_size'], 'tail_length': output_list[0]['tail_length']}
+    #     return race, body_dict
+    #     count = 0
+    #     # for item in over_list:
+    #     #     item_list = BG.Body_General(item, count)
+    #     #     item_list.append(self.Monster_NumberGen(item_list))
+    #     #     count = count + 1
+    #     # if horn:
+    #     #     item_list = BG.Body_General(head_list, 'head')
+    #     #     head_dict = {'form' : item_list[0], 'eye_color' : item_list[1] ,
+    #     #     'hair': {'lengt': item_list[2], 'type': item_list[3], 'color': item_list[4]},
+    #     #     'horn' : {'pair_number' : item_list[10], 'horn_size' : item_list[11], 'horn_form' : item_list[12]},
+    #     #     'nose': item_list[5], 'chin': item_list[6],
+    #     #     'ear': {'form': item_list[7], 'size': item_list[8]},
+    #     #     'lip_form': item_list[9]}
+    #     # else:
+    #     #     pass
+    #     person_dict = {'race': race, 'body': body_dict}
+    #     # person ={'race': race , 'body' : {'skin_color' : item_list[0], 'body_type': item_list[1]},
+    #     #     'head': {'form' : item_list[2], 'eye_color' : item_list[3] ,
+    #     #     'hair': {'lengt': item_list[4], 'type': item_list[5], 'color': item_list[6]},
+    #     #     'nose': item_list[7], 'chin': item_list[8],
+    #     #     'ear': {'form': item_list[9], 'size': item_list[10]},
+    #     #     'lip_form': item_list[11]}}
+    #     print(person_dict)
+    #     #print ( 'Es ist ein' + person['race'])
 
     def Monster_Orcoid(self):
         skin_c_list = [4, 5, 6, 7]
@@ -111,22 +112,22 @@ class Monster_Gen:
         return race, input_list
 
     def Monster_Human(self):
-        # skin_c_list = [0, 1, 2, 3, 4]
-        # body_t_list = [0,1,2,3,4,5,6]
-        # body_s_list = [0, 1, 2]
-        # headform_list = [0,1,2,3]
-        # eye_list = [0,1,2]
-        # hair_l_list = [0,1,2,3,4]
-        # hair_t_list = [0,1,2]
-        # hair_c_list = [0,1,2,3]
-        # nose_list = [0,1,2,3]
-        # chin_list = [0,1,2,3,4]
-    #    ear_f_list = [0,1]
-        # ear_s_list = [0,1]
-        # lip_f_list = [0,1,2,3,4]
-        # arm_l_list, hand_s_list, handclaw_s_list, leg_l_list, foot_s_list, footclaw_s_list = [
-        #     0,1,2], [0,1,2], [0, 1, 2], [0,1,2], [0,1,2], [0, 1, 2]
-        # foot_t_list = [0]
+        skin_c_list = [0, 1, 2, 3, 4]
+        body_t_list = [0,1,2,3,4,5,6]
+        body_s_list = [0, 1, 2]
+        headform_list = [0,1,2,3]
+        eye_list = [0,1,2]
+        hair_l_list = [0,1,2,3,4]
+        hair_t_list = [0,1,2]
+        hair_c_list = [0,1,2,3]
+        nose_list = [0,1,2,3]
+        chin_list = [0,1,2,3,4]
+        ear_f_list = [0,1]
+        ear_s_list = [0,1]
+        lip_f_list = [0,1,2,3,4]
+        arm_l_list, hand_s_list, handclaw_s_list, leg_l_list, foot_s_list, footclaw_s_list = [
+            0,1,2], [0,1,2], [0, 1, 2], [0,1,2], [0,1,2], [0, 1, 2]
+        foot_t_list = [0]
         body_dict = {'skin_color': skin_c_list, 'body_type': body_t_list,
                      'body_size': body_s_list, 'wing_size': None, 'tail_length': None}
         head_dict = {'head_form': headform_list, 'eye_color': eye_list, 'nose': nose_list, 'chin': chin_list, 'lip_form': lip_f_list,
