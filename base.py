@@ -1,14 +1,35 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, Integer, Date
+from sqlalchemy import Column, String, Integer, Date, ForeignKey
 
 Base = declarative_base()
+
+
+class Race(Base):
+    __tablename__ = 'race'
+
+    id = Column(Integer, primary_key=True)
+    race = Column(String, nullable=False, unique=True)
+    raceTplTorso = Column(Integer, ForeignKey('race_TplTorso.id'))
+    raceTplHead = Column(Integer, ForeignKey('race_TplHead.id'))
+    raceTplLimps = Column(Integer, ForeignKey('race_TplLimps.id'))
+
+    def __init__(self,
+                 race: str = '',
+                 raceTplTorso: str = '',
+                 raceTplHead: str = '',
+                 raceTplLimps: str = ''
+                 ):
+        self.race = race
+        self.raceTplTorso = raceTplTorso
+        self.raceTplHead = raceTplHead
+        self.raceTplLimps = raceTplLimps
 
 
 class RaceTplTorso(Base):
     __tablename__ = 'race_TplTorso'
 
     id = Column(Integer, primary_key=True)
-    race = Column(String)
+    race = Column(String,nullable=False, unique=True)
     SkinC = Column(String)
     BodyT = Column(String)
     BodyS = Column(String)
@@ -35,7 +56,7 @@ class RaceTplHead(Base):
     __tablename__ = 'race_TplHead'
 
     id = Column(Integer, primary_key=True)
-    race = Column(String)
+    race = Column(String,nullable=False, unique=True)
     HeadF = Column(String)
     EyeC = Column(String)
     HairL = Column(String)
@@ -90,7 +111,7 @@ class RaceTplLimps(Base):
     __tablename__ = 'race_TplLimps'
 
     id = Column(Integer, primary_key=True)
-    race = Column(String)
+    race = Column(String,nullable=False, unique=True)
     ArmL = Column(String)
     HandS = Column(String)
     HandclawS = Column(String)
