@@ -1,17 +1,32 @@
 from db_handler import DataBase
 from Random_Gen import Monster_NumberGen
+from base import RaceTplHead, RaceTplTorso, RaceTplLimps
+from alchemy import DbInterface
 
 
 class Body:
     """acts as an abstract Class for different Body generators
     """
 
-    def __init__(self, race):
+    race: str
+    torsoId: int
+    headId: int
+    limpsId: int
+    db: DbInterface
 
-        self.race = race
+    def __init__(self, race: dict):
+        self.race = race['name']
+        self.torsoId = race['torso']
+        self.headId = race['head']
+        self.limpsId = race['limps']
+        self.db = DbInterface()
 
-    def getHead(self):
-        raise NotImplementedError
+    def getHead(self, session):
+        result = object
+        for row in session.query(RaceTplHead) \
+            .filter(RaceTplHead.id == self.headId):
+            result = row
+        print(result.__dict__.keys())
 
     def getLimbs(self):
         raise NotImplementedError
@@ -49,10 +64,11 @@ class Body:
         return out
 
     def genBody(self):
-        self.bodyParts = self.getDBRace()
-        self.getHead()
-        self.getLimbs()
-        self.getTorso()
+        s = self.db.getSession()
+        # self.bodyParts = self.getDBRace()
+        self.getHead(s)
+        # self.getLimbs()
+        # self.getTorso()
 
 
 # class Head:
