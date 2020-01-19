@@ -1,5 +1,4 @@
 from alchemy import DbInterface
-from sqlalchemy import Column, String, Integer, Table
 
 import base as b
 
