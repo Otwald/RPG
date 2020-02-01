@@ -1,4 +1,4 @@
-from Random_Gen import Monster_NumberGen
+from random_gen import RandInterface as Ri
 from race import human
 from base import Race
 from alchemy import DbInterface
@@ -15,6 +15,7 @@ class BodyFactory:
 
     def __init__(self):
         self.db = DbInterface()
+        self.ri = Ri()
 
     def _getRaces(self) -> list:
         """makes a query to the Race Table and builds a list from the response
@@ -28,8 +29,5 @@ class BodyFactory:
 
     def Monster_ArtGen(self) -> object:
         races = self._getRaces()
-        race = Monster_NumberGen(races)
-        # module = __import__('race')
-        # submodule = getattr(module, 'human')
-        # raceClass = getattr(submodule, 'Human')
+        race = self.ri.getRanEle(races)
         return Body(race)
