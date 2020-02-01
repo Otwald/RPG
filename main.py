@@ -1,11 +1,31 @@
-from person import Person
-from db_handler import DataBase
-
-def main():
-    p = Person()
-    p.generatePerson()
-    print(p.body)
+import click
+import os
+from test import main
+from ini_db import body_gen as Bg, monster_gen as Mg
 
 
-if __name__ == "__main__":
-    main()
+@click.command()
+@click.option(
+    '--init',
+    help='creates local Memory',
+    is_flag=True
+)
+@click.option(
+    '--delete', '-del',
+    help='deletes local Memory',
+    is_flag=True
+)
+def cli(init: bool = False, delete: bool = False):
+    if init:
+        body = Bg.BodyGen()
+        body.checkDB()
+        mon = Mg.MonsterGen()
+        mon.checkDB()
+    if delete:
+        os.remove('memory.db')
+    if not delete and not init:
+        main()
+
+
+if __name__ == '__main__':
+    cli()
