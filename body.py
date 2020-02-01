@@ -58,9 +58,9 @@ class Body:
     def genBody(self):
         session = self.db.getSession()
         try:
-            self.head = self.getHead(session)
-            self.torso = self.getTorso(session)
-            self.limps = self.getLimbs(session)
+            self.head = {'head': self.getHead(session)}
+            self.torso = {'torso': self.getTorso(session)}
+            self.limps = {'limps': self.getLimbs(session)}
         except:
             session.rollback()
         finally:
