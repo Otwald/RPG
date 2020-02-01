@@ -6,7 +6,9 @@ class Person:
     """
 
     class Body:
-        pass
+        head: dict = {}
+        torso: dict = {}
+        limps: dict = {}
 
     def __init__(self):
         self.body = self.Body()
