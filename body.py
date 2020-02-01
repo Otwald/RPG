@@ -55,14 +55,6 @@ class Body:
             partdict=self.torsomap
         )
 
-    def getParts(self, parts: list, strut: str) -> list:
-        out = []
-        for part in parts:
-            for key, value in part.items():
-                if(key.split('_')[0] == strut):
-                    out.append({key: value})
-        return out
-
     def genBody(self):
         session = self.db.getSession()
         try:
