@@ -28,6 +28,10 @@ class BodyFactory:
         return out
 
     def Monster_ArtGen(self) -> object:
+        out = ['head','limps', 'torso']
         races = self._getRaces()
         race = self.ri.getRanEle(races)
-        return Body(race)
+        body =Body(race)
+        body.genBody()
+        for part in out:
+            yield getattr(body, part)

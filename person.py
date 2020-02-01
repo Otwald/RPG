@@ -10,14 +10,12 @@ class Person:
 
     def __init__(self):
         self.body = self.Body()
-    #     self.Equip = Equip()
 
     def generatePerson(self):
         tempbody = bf.BodyFactory().Monster_ArtGen()
         for part in tempbody:
-            # self.body[ =
-            setattr(self.body, list(part.keys())[0] ,  part[list(part.keys())[0]] )
-            # self.body =
+            setattr(self.body, list(part.keys())[
+                    0],  part[list(part.keys())[0]])
 
 
 class Equip:
